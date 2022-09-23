@@ -17,7 +17,6 @@ const Navbar = ({ accounts, setAccounts }) => {
       setAccounts(accounts);
     }
 
-
   }
 
   return (

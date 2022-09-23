@@ -10,6 +10,13 @@ const Navbar = ({ accounts, setAccounts }) => {
 
   // TODO: 連接錢包
   async function connectAccount() {
+    if(window.ethereum){
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts'
+      })
+      setAccounts(accounts);
+    }
+
 
   }
 

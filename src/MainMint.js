@@ -42,14 +42,28 @@ const MainMint = ({ accounts, setAccounts }) => {
   const handleMint = async () => {
     if (window.ethereum) {
       // TODO: 1) 設定 Provider
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       // TODO: 2) 設定 signer
+      const signer = provider.getSigner();
+
 
       // TODO: 3) new Contract 實體
-
+      const kryptoCampNFTContract = new ethers.Contract(
+        KryptoCampNFTAddress,
+        kryptoCampNFTAbi,
+        signer
+      )
 
       try {
-        // TODO: 4) 呼叫合約 mint 方法
+        // TODO: 4) 呼叫合約 mint 方法 
+        // await kryptoCampNFTContract.mint(價格,數量);
+        //console.log('mintAmount' , mintAmount);
+        const amount = 0.01 * mintAmount;
+        //console.log('最後送出的價格' , ethers.utils.parseUnits('0.01' , 'ether'))
+        const response = await kryptoCampNFTContract.mint(mintAmount , {value:ethers.utils.parseUnits(amount.toString() , 'ether')});
+
+        //console.log('response' , response);
 
       } catch ({ error }) {
         showToast(error.message)
